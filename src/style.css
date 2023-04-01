@@ -23,9 +23,12 @@ li {
 a {
   text-decoration: none;
 }
-.active{
+.active {
   color: black;
   cursor: default;
+}
+.float-left {
+  float: left !important;
 }
 .weather-app-wrapper {
   max-width: 600px;
