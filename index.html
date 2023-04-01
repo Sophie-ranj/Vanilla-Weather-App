@@ -1,3 +1,4 @@
+<!-- copy -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,38 +19,51 @@
     <div class="container">
       <div class="weather-app-wrapper">
         <div class="weather-app">
+          <form action="" id="search-form" class="mb-3">
+            <div class="row">
+              <div class="col-9">
+                <input
+                  type="search"
+                  name=""
+                  id="city-input"
+                  placeholder="Enter a city ..."
+                  class="form-control"
+                />
+              </div>
+              <div class="col-3">
+                <input
+                  type="submit"
+                  value="Search"
+                  class="btn btn-primary w-100"
+                />
+              </div>
+            </div>
+          </form>
           <div class="overview">
-            <h1>New York</h1>
+            <h1 id="city">New York</h1>
             <ul>
               <li>Friday 05:00</li>
               <li>Clear</li>
             </ul>
           </div>
-            <div class="row">
-              <div class="col-6">
-                <div class="clearfix weather-temperature">
-                  <img
-                    src="https://verbnow.com/wp-content/uploads/2022/03/Sun-Fin-960x640.jpg"
-                    alt="sun"
-                    class="float-left"
-                  />
-                  <div class="float-left">
-                    <strong>
-                      12
-                    </strong>
-                    <span class="units">°C | °F</span>
-                  </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="clearfix weather-temperature">
+                <img src="" alt="Clear" class="float-left" id="icon" />
+                <div class="float-left">
+                  <strong> 12 </strong>
+                  <span class="units">°C | °F</span>
                 </div>
               </div>
-              <div class="col-6">
-                <ul>
-                  <li>Precipation: 0%</li>
-                  <li>Humidity: 73%</li>
-                  <li>Wind: 2km/h</li>
-                </ul>
-              </div>
             </div>
-          </ul>
+            <div class="col-6">
+              <ul>
+                <li>Humidity: 73%</li>
+                <li>Wind: 2km/h</li>
+              </ul>
+            </div>
+          </div>
+          <div class="weather-forecast" id="forecast"></div>
         </div>
         <small>
           <a
