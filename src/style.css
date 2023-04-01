@@ -20,6 +20,13 @@ li {
   font-weight: 100;
   line-height: 19px;
 }
+a {
+  text-decoration: none;
+}
+.active{
+  color: black;
+  cursor: default;
+}
 .weather-app-wrapper {
   max-width: 600px;
   margin: 10px auto;
