@@ -30,7 +30,15 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+function getForecast(response) {
+  console.log("====", response);
+  let apiKey = "382f83908a2d98boe61baf6df768d4tb";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${response.longitude}&lat=${response.latitude}&key=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 let temperatureElement = document.querySelector("#temperature");
+
 function displayTemperature(response) {
   let cityElement = document.querySelector("#city");
   let descriptionElement = document.querySelector("#description");
@@ -53,6 +61,7 @@ function displayTemperature(response) {
   humidityElement.innerHTML = response.data.temperature.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed * 3.6);
   dateElement.innerHTML = formatDate(response.data.time * 1000);
+  getForecast(response.data.coordinates);
 }
 
 function search(city) {
@@ -77,18 +86,20 @@ function displayFahrenheit(event) {
   fahrenheitElement.classList.add("active");
   temperatureElement.innerHTML = Math.round(celsiusTemperature * 1.8 + 32);
 }
+
 function displayCelsius(event) {
   event.preventDefault();
   fahrenheitElement.classList.remove("active");
   celsiusElement.classList.add("active");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
-function displayForecast() {
+
+function displayForecast(response) {
+  console.log("FORECAST", response.data.daily);
   let forecastElement = document.querySelector("#forecast");
   let forecastHtml = `<div class="row">`;
   let days = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   days.forEach(function (days) {
-    console.log("1");
     forecastHtml =
       forecastHtml +
       `<div class="col-2">
@@ -104,12 +115,8 @@ function displayForecast() {
       </div>
     </div>`;
   });
-  console.log("2");
   forecastHtml = forecastHtml + `</div>`;
   forecastElement.innerHTML = forecastHtml;
-  //forecastHTML = forecastHTML + `</div>`;
-  //forecastElement.innerHTML = forecastHTML;
-  console.log("3");
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
@@ -119,5 +126,3 @@ fahrenheitElement.addEventListener("click", displayFahrenheit);
 
 let celsiusElement = document.querySelector("#celsius");
 celsiusElement.addEventListener("click", displayCelsius);
-
-displayForecast();
