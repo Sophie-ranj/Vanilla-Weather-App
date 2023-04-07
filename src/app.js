@@ -96,24 +96,31 @@ function displayCelsius(event) {
 
 function displayForecast(response) {
   console.log("FORECAST", response.data.daily);
+  console.log("FORECAST============", response.data.daily[0].condition.icon);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHtml = `<div class="row">`;
-  let days = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  days.forEach(function (days) {
-    forecastHtml =
-      forecastHtml +
-      `<div class="col-2">
-      <div class="weather-forecast-date">${days}</div>
+  forecast.forEach(function (forecastDay,index) {
+    if (index < 6) {
+      forecastHtml =
+        forecastHtml +
+        `<div class="col-2">
+      <div class="weather-forecast-date">${formatDay(forecastDay.time)}</div>
       <img
-        src="http://openweathermap.org/img/wn/50d@2x.png"
+        src="${forecastDay.condition.icon_url}"
         alt=""
         width="42"
       />
       <div class="weather-forecast-temperatures">
-        <span class="weather-forecast-temperature-max"> 18° </span>
-        <span class="weather-forecast-temperature-min"> 12° </span>
+        <span class="weather-forecast-temperature-max"> ${Math.round(
+          forecastDay.temperature.maximum
+        )}° </span>
+        <span class="weather-forecast-temperature-min"> ${Math.round(
+          forecastDay.temperature.minimum
+        )}° </span>
       </div>
     </div>`;
+    }
   });
   forecastHtml = forecastHtml + `</div>`;
   forecastElement.innerHTML = forecastHtml;
