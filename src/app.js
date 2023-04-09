@@ -31,7 +31,6 @@ function formatDay(timestamp) {
 }
 
 function getForecast(response) {
-  console.log("====", response);
   let apiKey = "382f83908a2d98boe61baf6df768d4tb";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${response.longitude}&lat=${response.latitude}&key=${apiKey}`;
   axios.get(apiUrl).then(displayForecast);
@@ -47,7 +46,6 @@ function displayTemperature(response) {
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
 
-  console.log("------>", response.data);
   iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
@@ -80,27 +78,11 @@ function handleSubmit(event) {
   cityElement.innerHTML = cityInputElement.value;
 }
 
-function displayFahrenheit(event) {
-  event.preventDefault();
-  celsiusElement.classList.remove("active");
-  fahrenheitElement.classList.add("active");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature * 1.8 + 32);
-}
-
-function displayCelsius(event) {
-  event.preventDefault();
-  fahrenheitElement.classList.remove("active");
-  celsiusElement.classList.add("active");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
 function displayForecast(response) {
-  console.log("FORECAST", response.data.daily);
-  console.log("FORECAST============", response.data.daily[0].condition.icon);
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHtml = `<div class="row">`;
-  forecast.forEach(function (forecastDay,index) {
+  forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
       forecastHtml =
         forecastHtml +
@@ -127,9 +109,6 @@ function displayForecast(response) {
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
-
-let fahrenheitElement = document.querySelector("#fahrenheit");
-fahrenheitElement.addEventListener("click", displayFahrenheit);
 
 let celsiusElement = document.querySelector("#celsius");
 celsiusElement.addEventListener("click", displayCelsius);
